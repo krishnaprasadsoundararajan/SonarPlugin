@@ -1,0 +1,7 @@
+unitTest\model\TestReport.class
+unitTest\UnitTestMetrics.class
+unitTest\analyzers\AnalyzerException.class
+unitTest\analyzers\TestReportAnalyzer.class
+unitTest\UnitTestSensor.class
+unitTest\UnitTestPlugin.class
+unitTest\UnitTestDashboardWidget.class

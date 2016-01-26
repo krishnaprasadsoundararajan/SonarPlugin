@@ -1,0 +1,6 @@
+﻿<reportPath>
+<unitTestsTrunk>
+	<lastBuild>http://xxxx/job/unittests-trunk/lastBuild/artifact/unittest-report.html</lastBuild>
+	<lastSuccessfulBuild>http://xxxx/job/unittests-trunk/lastSuccessfulBuild/artifact/unittest-report.html</lastSuccessfulBuild>
+</unitTestsTrunk>
+</reportPath>

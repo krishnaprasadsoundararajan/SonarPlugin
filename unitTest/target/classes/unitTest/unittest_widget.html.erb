@@ -1,0 +1,160 @@
+<%
+    def check_image(metric_or_measure)
+        html = ''
+
+        if metric_or_measure.is_a? ProjectMeasure
+            m = metric_or_measure
+        elsif @snapshot
+            m = @snapshot.measure(metric_or_measure)
+        end
+
+        if m.nil?
+            return ''
+        end
+
+        if m && m.metric
+            if m.value == 1
+                html = image_tag(url_for_static(:plugin => 'unitTest', :path => 'check-round-yes-small.png'), :size => '32x32', :style => 'vertical-align:middle')
+            elsif
+                html = image_tag(url_for_static(:plugin => 'unitTest', :path => 'check-round-no-small.png'), :size => '32x32', :style => 'vertical-align:middle')
+            end
+        end
+
+        html
+    end
+    
+   def get_data(metric_or_measure)
+        html = ''
+
+        if metric_or_measure.is_a? ProjectMeasure
+            m = metric_or_measure
+        elsif @snapshot
+            m = @snapshot.measure(metric_or_measure)
+        end
+
+        if m.nil?
+            return ''
+        end
+
+        m.data
+    end
+    
+    def get_value(metric_or_measure)
+        html = ''
+
+        if metric_or_measure.is_a? ProjectMeasure
+            m = metric_or_measure
+        elsif @snapshot
+            m = @snapshot.measure(metric_or_measure)
+        end
+
+        if m.nil?
+            return ''
+        end
+
+        m.value
+    end
+
+    def remove_brackets(metric_or_measure)
+        out = ''
+
+        if metric_or_measure.is_a? ProjectMeasure
+            m = metric_or_measure
+        elsif @snapshot
+            m = @snapshot.measure(metric_or_measure)
+        end
+
+        if m.nil?
+            return ''
+        end
+
+        if m && m.metric
+            out = m.data[1..-2]
+        end
+
+        out
+    end
+%>
+<div class="dashbox">
+    <h3>Unit Test Results</h3>
+    <%= check_image('is_success') -%>
+</div>
+</br>
+<div class="dashbox">
+                    <table class="width100" ;>
+                        <tbody>
+                            <tr>
+                                <td style="width=100%; vertical-align:top; padding: 0 50px 0 0;">
+                                    <span style="vertical-align:middle">Total Errors</span>
+                                </td>
+                                <td style="width=100%; vertical-align:top; padding: 0 50px 0 0;">
+                                    <%= format_measure('total_errors') -%>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td style="width=100%; vertical-align:top; padding: 0 50px 0 0;">
+                                    <span style="vertical-align:middle">Unit Test Total</span>
+                                </td>
+                                <td style="width=100%; vertical-align:top; padding: 0 50px 0 0;">
+                                    <%= format_measure('unit_tests_total') -%> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width=100%; vertical-align:top; padding: 0 50px 0 0;">
+                                    <span style="vertical-align:middle">Test Cases Passed</span>
+                                </td>    
+                                <td style="width=100%; vertical-align:top; padding: 0 50px 0 0;">
+                                    <%= format_measure('test_cases_passed') -%>
+                                </td>                           
+                            </tr>
+                            <tr>
+                                <td style="width=100%; vertical-align:top; padding: 0 50px 0 0;">
+                                    <span style="vertical-align:middle">Test Cases Failed</span>
+                                </td>
+                                 <td style="width=100%; vertical-align:top; padding: 0 50px 0 0;">
+                                    <%= format_measure('test_cases_failed') -%>
+                                    
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td style="width=100%; vertical-align:top; padding: 0 50px 0 0;">
+                                    <span style="vertical-align:middle">Assertions Passed</span>
+                                </td>
+                                <td style="width=100%; vertical-align:top; padding: 0 50px 0 0;">
+                                    <%= format_measure('assertions_passed') -%>
+                                </td>
+                                
+                            </tr>
+                            
+                            <tr>
+                                <td style="width=100%; vertical-align:top; padding: 0 50px 0 0;">
+                                    <span style="vertical-align:middle">Assertions Failed</span>
+                                </td>
+                                <td style="width=100%; vertical-align:top; padding: 0 50px 0 0;">
+                                    <%= format_measure('assertions_failed') -%>
+                                </td>
+                                
+                            </tr>
+                            
+                            <tr>
+                                <td style="width=100%; vertical-align:top; padding: 0 50px 0 0;">
+                                    <span style="vertical-align:middle">Last Successful Build</span>
+                                </td>
+                                <td style="width=100%; vertical-align:top; padding: 0 50px 0 0;">
+                                   <%= format_measure('last_successful_build') -%>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td style="width=100%; vertical-align:top; padding: 0 50px 0 0;">
+                                    <span style="vertical-align:middle">Last Build</span>
+                                </td>
+                                <td style="width=100%; vertical-align:top; padding: 0 50px 0 0;">      
+                                  <%= format_measure('last_build') -%>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+</div>
